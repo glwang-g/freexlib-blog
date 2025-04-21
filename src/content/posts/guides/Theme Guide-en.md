@@ -73,11 +73,11 @@ color: {
 global: {
   // default language
   // language of the site root path '/'
-  locale: 'zh' // zh, zh-tw, ja, en, es, ru
+  locale: 'zh' 
   // more languages
   // Generate multi-language paths such as '/es/' '/ru/'
   // do not include the default language again, can be an empty array []
-  moreLocales: ['zh-tw', 'ja', 'en', 'es', 'ru'] // ['zh', 'zh-tw', 'ja', 'en', 'es', 'ru']
+  moreLocales: ['en'] 
   // font style
   fontStyle: 'sans' // sans, serif
   // date format for posts
@@ -300,7 +300,7 @@ tags:
 draft: true/false
 pin: 1-99
 toc: true/false
-lang: en/es/ru/zh/zh-tw/ja
+lang: en/zh
 abbrlink: theme-guide
 ---
 ```

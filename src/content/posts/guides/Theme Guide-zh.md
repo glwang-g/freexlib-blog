@@ -73,11 +73,11 @@ color: {
 global: {
   // 默认语言
   // 站点根路径 '/' 的语言
-  locale: 'zh' // zh, zh-tw, ja, en, es, ru
+  locale: 'zh' 
   // 更多语言
   // 生成 '/ja/' '/en/' 等多语言路径
   // 不要重复填写默认语言，可以为空 []
-  moreLocales: ['zh-tw', 'ja', 'en', 'es', 'ru'] // ['zh', 'zh-tw', 'ja', 'en', 'es', 'ru']
+  moreLocales: ['en'] 
   // 字体样式
   fontStyle: 'sans' // sans, serif
   // 文章日期格式
@@ -300,7 +300,7 @@ tags:
 draft: true/false
 pin: 1-99
 toc: true/false
-lang: zh/zh-tw/ja/en/es/ru
+lang: zh/en
 abbrlink: theme-guide
 ---
 ```

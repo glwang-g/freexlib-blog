@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 type ExcerptScene = 'list' | 'meta' | 'og' | 'rss'
 
 const parser = new MarkdownIt()
-const isCJKLang = (lang: string) => ['zh', 'zh-tw', 'ja'].includes(lang)
+const isCJKLang = (lang: string) => ['zh'].includes(lang)
 
 // Excerpt length in different scenarios
 const EXCERPT_LENGTHS: Record<ExcerptScene, {
