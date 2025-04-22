@@ -4,13 +4,11 @@ export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
     // site title
-    title: 'Retypeset',
+    title: '小茅屋',
     // site subtitle
-    subtitle: 'Revive the beauty of typography',
+    subtitle: '随时随地随便躺着的地方',
     // site description
-    description: 'Retypeset is a static blog theme based on the Astro framework. Inspired by Typography, Retypeset establishes a new visual standard and reimagines the layout of all pages, creating a reading experience reminiscent of paper books, reviving the beauty of typography. Details in every sight, elegance in every space.',
-    // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
-    i18nTitle: true, // true, false
+    description: '随便吧，就是想找个安静的空间。。。',
     // author name
     author: 'Coffee',
     // site url
@@ -52,11 +50,6 @@ export const themeConfig: ThemeConfig = {
 
   // GLOBAL SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   global: {
-    // default language
-    locale: 'zh', 
-    // more languages
-    // not fill in the locale code above again
-    moreLocales: ['en'], 
     // font styles for post text
     fontStyle: 'sans', // sans, serif
     // date format for posts
@@ -166,7 +159,7 @@ export const themeConfig: ThemeConfig = {
     // comment server url
     commentURL: 'https://retypeset-comment.radishzz.cc',
     // image hosting url
-    imageHostURL: 'https://image.radishzz.cc',
+    imageHostURL: '',
     // custom google analytics js
     // for users who route analytics javascript to a customized domain
     // See https://gist.github.com/xiaopc/0602f06ca465d76bd9efd3dda9393738
@@ -180,7 +173,3 @@ export const themeConfig: ThemeConfig = {
 }
 
 export default themeConfig
-
-export const defaultLocale = themeConfig.global.locale
-export const moreLocales = themeConfig.global.moreLocales
-export const allLocales = [defaultLocale, ...moreLocales]

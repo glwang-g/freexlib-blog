@@ -1,6 +1,5 @@
 import type { CollectionEntry } from 'astro:content'
-import { defaultLocale, themeConfig } from '@/config'
-import { ui } from '@/i18n/ui'
+import { themeConfig } from '@/config'
 import { generateDescription } from '@/utils/description'
 import rss from '@astrojs/rss'
 import { getCollection } from 'astro:content'
@@ -12,19 +11,17 @@ const { title, description, url } = themeConfig.site
 const followConfig = themeConfig.seo?.follow
 
 interface GenerateRSSOptions {
-  lang?: string
 }
 
-export async function generateRSS({ lang }: GenerateRSSOptions = {}) {
-  const currentUI = ui[lang as keyof typeof ui] || ui[defaultLocale as keyof typeof ui]
-  const siteTitle = themeConfig.site.i18nTitle ? currentUI.title : title
-  const siteDescription = themeConfig.site.i18nTitle ? currentUI.description : description
+export async function generateRSS({ }: GenerateRSSOptions = {}) {
+  const siteTitle = title
+  const siteDescription = description
 
   // Get posts for specific language (including universal posts and default language when lang is undefined)
   const posts = await getCollection(
     'posts',
     ({ data }: { data: CollectionEntry<'posts'>['data'] }) =>
-      (!data.draft && (data.lang === lang || data.lang === '' || (lang === undefined && data.lang === defaultLocale))),
+      !data.draft,
   )
 
   // Sort posts by published date in descending order
@@ -34,12 +31,11 @@ export async function generateRSS({ lang }: GenerateRSSOptions = {}) {
 
   return rss({
     title: siteTitle,
-    site: lang ? `${url}/${lang}` : url,
+    site: url,
     description: siteDescription,
     stylesheet: '/rss/rss-style.xsl',
     customData: `
     <copyright>Copyright © ${new Date().getFullYear()} ${themeConfig.site.author}</copyright>
-    <language>${lang || themeConfig.global.locale}</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${followConfig?.feedID && followConfig?.userID
         ? `<follow_challenge>
@@ -53,7 +49,7 @@ export async function generateRSS({ lang }: GenerateRSSOptions = {}) {
       title: post.data.title,
       // Generate URL with language prefix and abbrlink/slug
       link: new URL(
-        `${post.data.lang !== defaultLocale && post.data.lang !== '' ? `${post.data.lang}/` : ''}posts/${post.data.abbrlink || post.id}/`,
+        `posts/${post.data.abbrlink || post.id}/`,
         url,
       ).toString(),
       description: generateDescription(post, 'rss'),

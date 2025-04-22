@@ -1,6 +1,5 @@
 ---
-import { defaultLocale, themeConfig } from '@/config'
-import { walineLocaleMap } from '@/i18n/config'
+import { themeConfig } from '@/config'
 
 const {
   serverURL = '',
@@ -9,22 +8,8 @@ const {
   imageUploader = false,
 } = themeConfig.comment?.waline ?? {}
 
-// Get the language code of Waline
-function getWalineLang(currentPath: string, defaultLocale: string): string {
-  // Extract language code from path
-  const pathLang = Object.keys(walineLocaleMap).find(code =>
-    currentPath.startsWith(`/${code}/`),
-  )
-  // Return found path language or default language
-  const lang = pathLang || defaultLocale
-  return walineLocaleMap[lang as keyof typeof walineLocaleMap]
-}
-
-// Get Waline language and generate configuration json
-const walineLang = getWalineLang(Astro.url.pathname, defaultLocale)
 const walineConfigJson = JSON.stringify({
   serverURL,
-  lang: walineLang,
   emoji,
   search,
   imageUploader,

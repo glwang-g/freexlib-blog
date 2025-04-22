@@ -10,12 +10,10 @@ import rehypeSlug from 'rehype-slug'
 import remarkMath from 'remark-math'
 import UnoCSS from 'unocss/astro'
 import { themeConfig } from './src/config'
-import { langMap } from './src/i18n/config'
 import { rehypeImgToFigure } from './src/plugins/rehype-img-to-figure.mjs'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
 const url = themeConfig.site.url
-const locale = themeConfig.global.locale
 const linkPrefetch = themeConfig.preload.linkPrefetch
 const imageHostURL = themeConfig.preload.imageHostURL
 const imageConfig = imageHostURL
@@ -38,13 +36,6 @@ export default defineConfig({
     defaultStrategy: linkPrefetch,
   },
   ...imageConfig,
-  i18n: {
-    locales: Object.entries(langMap).map(([path, codes]) => ({
-      path,
-      codes: codes as [string, ...string[]],
-    })),
-    defaultLocale: locale,
-  },
   integrations: [
     UnoCSS({
       injectReset: true,

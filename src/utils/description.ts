@@ -1,11 +1,9 @@
 import type { CollectionEntry } from 'astro:content'
-import { defaultLocale } from '@/config'
 import MarkdownIt from 'markdown-it'
 
 type ExcerptScene = 'list' | 'meta' | 'og' | 'rss'
 
 const parser = new MarkdownIt()
-const isCJKLang = (lang: string) => ['zh'].includes(lang)
 
 // Excerpt length in different scenarios
 const EXCERPT_LENGTHS: Record<ExcerptScene, {
@@ -43,7 +41,6 @@ const HTML_ENTITIES: Record<string, string> = {
 export function generateExcerpt(
   content: string,
   scene: ExcerptScene,
-  lang: string,
 ): string {
   if (!content)
     return ''
@@ -53,9 +50,7 @@ export function generateExcerpt(
     .replace(/^#{1,6}\s+\S.*$/gm, '')
     .replace(/\n{2,}/g, '\n\n')
 
-  const length = isCJKLang(lang)
-    ? EXCERPT_LENGTHS[scene].cjk
-    : EXCERPT_LENGTHS[scene].other
+  const length = EXCERPT_LENGTHS[scene].cjk
 
   // Remove all HTML tags
   let plainText = parser.render(contentWithoutHeadings)
@@ -86,6 +81,5 @@ export function generateDescription(
   if (post.data.description)
     return post.data.description
 
-  const lang = (!post.data.lang || post.data.lang === '') ? defaultLocale : post.data.lang
-  return generateExcerpt(post.body || '', scene, lang)
+  return generateExcerpt(post.body || '', scene)
 }

@@ -1,6 +1,3 @@
-import { moreLocales } from '@/config'
-import { getLangFromPath } from '@/i18n/lang'
-import { getLocalizedPath } from '@/i18n/path'
 
 // Removes leading and trailing slashes from a path
 export function cleanPath(path: string) {
@@ -10,31 +7,31 @@ export function cleanPath(path: string) {
 // Checks if the current path is the home/post/tag/about page
 export function isHomePage(path: string) {
   const clean = cleanPath(path)
-  return clean === '' || moreLocales.includes(clean)
+  return clean === ''
 }
 export function isPostPage(path: string) {
   const clean = cleanPath(path)
-  return clean.startsWith('posts') || moreLocales.some(lang => clean.startsWith(`${lang}/posts`))
+  return clean.startsWith('posts')
 }
 export function isTagPage(path: string) {
   const clean = cleanPath(path)
-  return clean.startsWith('tags') || moreLocales.some(lang => clean.startsWith(`${lang}/tags`))
+  return clean.startsWith('tags')
 }
 export function isAboutPage(path: string) {
   const clean = cleanPath(path)
-  return clean.startsWith('about') || moreLocales.some(lang => clean.startsWith(`${lang}/about`))
+  return clean.startsWith('about')
 }
 
 // Returns page context including language and page type information
 export function getPageInfo(path: string) {
-  const currentLang = getLangFromPath(path)
-
   return {
-    currentLang,
     isHome: isHomePage(path),
     isPost: isPostPage(path),
     isTag: isTagPage(path),
     isAbout: isAboutPage(path),
-    getLocalizedPath: (targetPath: string) => getLocalizedPath(targetPath, currentLang),
+    getLocalizedPath: (targetPath: string) => {
+      const cleanP = cleanPath(targetPath)
+      return cleanP===''?'/':`/${cleanP}/`
+    },
   }
 }

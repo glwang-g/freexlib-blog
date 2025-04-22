@@ -1,4 +1,3 @@
-import type { supportedLangs } from '@/i18n/config'
 
 type Exclude<T, U> = T extends U ? never : T
 
@@ -8,7 +7,6 @@ export interface ThemeConfig {
     title: string
     subtitle: string
     description: string
-    i18nTitle: boolean
     author: string
     url: string
     favicon: string
@@ -29,8 +27,6 @@ export interface ThemeConfig {
   }
 
   global: {
-    locale: typeof supportedLangs[number]
-    moreLocales: typeof supportedLangs[number][]
     fontStyle: 'sans' | 'serif'
     dateFormat: 'YYYY-MM-DD' | 'MM-DD-YYYY' | 'DD-MM-YYYY' | 'MONTH DAY YYYY' | 'DAY MONTH YYYY'
     titleGap: 1 | 2 | 3

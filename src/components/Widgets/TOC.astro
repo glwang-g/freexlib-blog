@@ -1,14 +1,10 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import { ui } from '@/i18n/ui'
-import { getPageInfo } from '@/utils/page'
+import { ui } from '@/ui'
 
 interface Props {
   headings: MarkdownHeading[]
 }
-
-const { currentLang } = getPageInfo(Astro.url.pathname)
-const currentUI = ui[currentLang as keyof typeof ui]
 
 const { headings = [] } = Astro.props
 const filteredHeadings = headings.filter(heading =>
@@ -35,7 +31,7 @@ const filteredHeadings = headings.filter(heading =>
         class="absolute inset-0 flex cursor-pointer items-center 2xl:(static h-max w-max flex c-secondary/40 transition-colors ease-out hover:c-secondary/80)"
       >
         <span class="toc-title">
-          {currentUI.toc}
+          {ui.toc}
         </span>
 
         <svg

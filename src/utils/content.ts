@@ -1,5 +1,4 @@
 import type { CollectionEntry } from 'astro:content'
-import { defaultLocale } from '@/config'
 import { getCollection, render } from 'astro:content'
 
 // Type definitions
@@ -15,54 +14,19 @@ async function addMetaToPost(post: CollectionEntry<'posts'>): Promise<Post> {
   return { ...post, remarkPluginFrontmatter: remarkPluginFrontmatter as { minutes: number } }
 }
 
-/**
- * Find duplicate post slugs within the same language
- * @param posts Array of blog posts
- * @returns Array of descriptive error messages for duplicate slugs
- */
-export async function checkPostSlugDuplication(posts: CollectionEntry<'posts'>[]): Promise<string[]> {
-  const slugMap = new Map<string, Set<string>>()
-  const duplicates: string[] = []
-
-  posts.forEach((post) => {
-    const lang = post.data.lang
-    const slug = post.data.abbrlink || post.id
-
-    if (!slugMap.has(lang)) {
-      slugMap.set(lang, new Set())
-    }
-
-    const slugSet = slugMap.get(lang)!
-    if (slugSet.has(slug)) {
-      if (!lang) {
-        duplicates.push(`Duplicate slug "${slug}" found in universal post (applies to all languages)`)
-      }
-      else {
-        duplicates.push(`Duplicate slug "${slug}" found in "${lang}" language post`)
-      }
-    }
-    else {
-      slugSet.add(slug)
-    }
-  })
-
-  return duplicates
-}
 
 /**
  * Get all posts (including pinned ones, excluding drafts in production)
  * @param lang Language code, optional, defaults to site's default language
  * @returns Posts filtered by language, enhanced with metadata, sorted by date
  */
-export async function getPosts(lang?: string) {
-  const currentLang = lang || defaultLocale
-
+export async function getPosts() {
   const filteredPosts = await getCollection(
     'posts',
     ({ data }: CollectionEntry<'posts'>) => {
       // Show drafts in dev mode only
       const shouldInclude = import.meta.env.DEV || !data.draft
-      return shouldInclude && (data.lang === currentLang || data.lang === '')
+      return shouldInclude 
     },
   )
 
@@ -78,8 +42,8 @@ export async function getPosts(lang?: string) {
  * @param lang Language code, optional, defaults to site's default language
  * @returns Regular posts (not pinned), already filtered by language and drafts
  */
-export async function getRegularPosts(lang?: string) {
-  const posts = await getPosts(lang)
+export async function getRegularPosts() {
+  const posts = await getPosts()
   return posts.filter(post => !post.data.pin)
 }
 
@@ -88,8 +52,8 @@ export async function getRegularPosts(lang?: string) {
  * @param lang Language code, optional, defaults to site's default language
  * @returns Pinned posts sorted by pin value in descending order
  */
-export async function getPinnedPosts(lang?: string) {
-  const posts = await getPosts(lang)
+export async function getPinnedPosts() {
+  const posts = await getPosts()
   return posts
     .filter(post => post.data.pin && post.data.pin > 0)
     .sort((a, b) => (b.data.pin || 0) - (a.data.pin || 0))
@@ -100,8 +64,8 @@ export async function getPinnedPosts(lang?: string) {
  * @param lang Language code, optional, defaults to site's default language
  * @returns Map of posts grouped by year (descending), with posts in each year sorted by date (descending)
  */
-export async function getPostsByYear(lang?: string): Promise<Map<number, Post[]>> {
-  const posts = await getRegularPosts(lang)
+export async function getPostsByYear(): Promise<Map<number, Post[]>> {
+  const posts = await getRegularPosts()
   const yearMap = new Map<number, Post[]>()
 
   posts.forEach((post: Post) => {
@@ -128,8 +92,8 @@ export async function getPostsByYear(lang?: string): Promise<Map<number, Post[]>
  * @param lang Language code, optional, defaults to site's default language
  * @returns Array of tags sorted by popularity (most posts first)
  */
-export async function getAllTags(lang?: string) {
-  const tagMap = await getPostsGroupByTags(lang)
+export async function getAllTags() {
+  const tagMap = await getPostsGroupByTags()
   const tagsWithCount = Array.from(tagMap.entries())
 
   tagsWithCount.sort((a, b) => b[1].length - a[1].length)
@@ -141,8 +105,8 @@ export async function getAllTags(lang?: string) {
  * @param lang Language code, optional, defaults to site's default language
  * @returns Map where keys are tag names and values are arrays of posts with that tag
  */
-export async function getPostsGroupByTags(lang?: string) {
-  const posts = await getPosts(lang)
+export async function getPostsGroupByTags() {
+  const posts = await getPosts()
   const tagMap = new Map<string, Post[]>()
 
   posts.forEach((post: Post) => {
@@ -163,7 +127,7 @@ export async function getPostsGroupByTags(lang?: string) {
  * @param lang Language code, optional, defaults to site's default language
  * @returns Array of posts that contain the specified tag
  */
-export async function getPostsByTag(tag: string, lang?: string) {
-  const tagMap = await getPostsGroupByTags(lang)
+export async function getPostsByTag(tag: string) {
+  const tagMap = await getPostsGroupByTags()
   return tagMap.get(tag) || []
 }
