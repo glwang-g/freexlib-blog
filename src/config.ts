@@ -4,18 +4,22 @@ export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
     // site title
-    title: '小茅屋',
+    title: '自在小屋',
     // site subtitle
-    subtitle: '随时随地随便躺着的地方',
+    subtitle: '随时随地，随想随在，安静怡然',
     // site description
-    description: '随便吧，就是想找个安静的空间。。。',
+    description: '一个可以自由自在，安静躺着的地方。。。',
     // author name
     author: 'Coffee',
     // site url
-    url: 'https://blog.freexlib.com',
+    url: 'https://freexlib.com',
     // favicon url
     // recommended formats: svg, png or ico
-    favicon: '/icon/favicon.svg', // or https://example.com/favicon.svg
+    favicon: '/icon/favicon.svg', 
+    posts: '文章',
+    tags: '标签',
+    about: '关于',
+    toc: '目录',
   },
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
 
@@ -130,16 +134,8 @@ export const themeConfig: ThemeConfig = {
     // social links
     links: [
       {
-        name: 'RSS',
-        url: '/rss.xml', // rss.xml, atom.xml
-      },
-      {
         name: 'GitHub',
-        url: 'https://github.com/radishzzz/astro-theme-retypeset',
-      },
-      {
-        name: 'Twitter',
-        url: 'https://x.com/radishzz_',
+        url: 'https://github.com/glwang-g/freexlib-blog',
       },
       // {
       //   name: 'Email',

@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import { ui } from '@/ui'
+import { themeConfig } from '@/config'
 
 interface Props {
   headings: MarkdownHeading[]
@@ -31,7 +31,7 @@ const filteredHeadings = headings.filter(heading =>
         class="absolute inset-0 flex cursor-pointer items-center 2xl:(static h-max w-max flex c-secondary/40 transition-colors ease-out hover:c-secondary/80)"
       >
         <span class="toc-title">
-          {ui.toc}
+          {themeConfig.site.toc}
         </span>
 
         <svg

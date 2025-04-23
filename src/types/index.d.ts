@@ -10,6 +10,10 @@ export interface ThemeConfig {
     author: string
     url: string
     favicon: string
+    posts: string
+    tags: string
+    about: string
+    toc: string
   }
 
   color: {
