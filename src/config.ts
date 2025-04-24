@@ -15,7 +15,7 @@ export const themeConfig: ThemeConfig = {
     url: 'https://freexlib.com',
     // favicon url
     // recommended formats: svg, png or ico
-    favicon: '/icon/favicon.svg', 
+    favicon: 'favicon.ico', 
     posts: '文章',
     tags: '标签',
     about: '关于',
@@ -153,7 +153,7 @@ export const themeConfig: ThemeConfig = {
     // docs: https://docs.astro.build/en/guides/prefetch/#prefetch-strategies
     linkPrefetch: 'viewport', // hover, tap, viewport, load
     // comment server url
-    commentURL: 'https://retypeset-comment.radishzz.cc',
+    commentURL: '',
     // image hosting url
     imageHostURL: '',
     // custom google analytics js
@@ -163,7 +163,7 @@ export const themeConfig: ThemeConfig = {
     // custom umami analytics js
     // for users who deploy umami on their own, or route analytics javascript to a customized domain
     // see https://github.com/umami-software/umami/discussions/1026
-    customUmamiAnalyticsJS: 'https://js.radishzz.cc/jquery.min.js',
+    customUmamiAnalyticsJS: '',
   },
   // PRELOAD SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
 }
