@@ -15,7 +15,7 @@ export const themeConfig: ThemeConfig = {
     url: 'https://freexlib.com',
     // favicon url
     // recommended formats: svg, png or ico
-    favicon: 'favicon.ico', 
+    favicon: '/favicon.ico', 
     posts: '文章',
     tags: '标签',
     about: '关于',
